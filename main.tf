@@ -4,8 +4,11 @@
 data "google_client_config" "current" {}
 
 provider "google" {
-  project = "terraformtest-252808"
+    credentials = "${file("../account.json")}"
+    project = "TerraformTest"
+    region = "europe-west4"
 }
+
 
 # ---------------------------------------------------------------------------------------------------------------------
 # Kubernetes Cluster
