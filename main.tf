@@ -14,7 +14,7 @@ provider "google" {
 # Kubernetes Cluster
 # ---------------------------------------------------------------------------------------------------------------------
 
-resource "google_container_cluster" "gke-cluster" {
+resource "google_container_cluster" "gkecluster" {
   name               = "test-cluster"
   network            = "default"
   location               = "europe-west4-a"
