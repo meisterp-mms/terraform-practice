@@ -4,7 +4,7 @@
 data "google_client_config" "current" {}
 
 provider "google" {
-    credentials = "${file("../account.json")}"
+    credentials = "${file("account.json")}"
     project = "TerraformTest"
     region = "europe-west4"
 }
