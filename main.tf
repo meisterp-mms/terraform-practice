@@ -15,12 +15,12 @@ provider "google" {
 
 
 resource "google_compute_instance" "default" {
-  name         = "governance-system"
+  name         = "playground_server"
   machine_type = "f1-micro"
   zone         = "europe-west4-b"
   project      = "terraformtest-252808"
 
-  tags = ["governance-system"]
+  tags = ["playground_server"]
 
   boot_disk {
     initialize_params {
@@ -28,7 +28,7 @@ resource "google_compute_instance" "default" {
       size  = "100"
     }
   }
-  metadata_startup_script = "sudo apt-get -y update;  sudo apt-get -y dist-upgrade;  sudo apt-get -y install nginx"
+  metadata_startup_script = "sudo apt -y update && sudo apt install nginx"
 
 
   network_interface {
