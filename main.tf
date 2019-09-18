@@ -18,7 +18,7 @@ resource "google_compute_instance" "default" {
   name         = "governance-system"
   machine_type = "f1-micro"
   zone         = "europe-west4-b"
-  project      = "${module.project.project_id}"
+  project      = "terraformtest-252808"
 
   tags = ["governance-system"]
 
