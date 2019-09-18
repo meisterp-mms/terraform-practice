@@ -28,7 +28,7 @@ resource "google_compute_instance" "default" {
       size  = "100"
     }
   }
-  metadata_startup_script = "sudo apt-get -y update; sudo apt-get -y dist-upgrade ; sudo apt-get -y install nginx"
+  metadata_startup_script = "sudo apt-get -y update;  sudo apt-get -y dist-upgrade;  sudo apt-get -y install nginx"
 
 
   network_interface {
