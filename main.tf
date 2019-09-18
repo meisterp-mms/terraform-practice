@@ -4,7 +4,7 @@
 
 provider "google" {
   credentials = "account.json"
-  project     = "TerraformTest"
+  project     = "terraformtest-252808"
   region      = "europe-west4"
 }
 
@@ -13,14 +13,35 @@ provider "google" {
 # Kubernetes Cluster
 # ---------------------------------------------------------------------------------------------------------------------
 
-resource "google_container_cluster" "test-cluster" {
-  name                     = "test-cluster"
-  network                  = "default"
-  location                 = "europe-west4-a"
-  remove_default_node_pool = true
-  initial_node_count       = 1
-  node_config {
-    machine_type = "f1-micro"
+
+resource "google_compute_instance" "default" {
+  name         = "governance-system"
+  machine_type = "f1-micro"
+  zone         = "europe-west4-b"
+  project      = "${module.project.project_id}"
+
+  tags = ["governance-system"]
+
+  boot_disk {
+    initialize_params {
+      image = "debian-cloud/debian-9"
+      size  = "100"
+    }
+  }
+  metadata_startup_script = "sudo apt-get -y update; sudo apt-get -y dist-upgrade ; sudo apt-get -y install nginx"
+
+
+  network_interface {
+    network    = "${module.network.network_self_link}"
+    subnetwork = "${module.network.subnet_self_link}"
+
+    access_config {
+      // Ephemeral IP
+    }
+  }
+
+  service_account {
+    scopes = ["userinfo-email", "compute-ro", "storage-ro", "cloud-platform"]
   }
 
 }
