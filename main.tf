@@ -31,14 +31,12 @@ resource "google_compute_instance" "default" {
   metadata_startup_script = "sudo apt-get -y update; sudo apt-get -y dist-upgrade ; sudo apt-get -y install nginx"
 
 
- # network_interface {
- #   network    = "${module.network.network_self_link}"
- #   subnetwork = "${module.network.subnet_self_link}"
-
-#    access_config {
+  network_interface {
+  network    = "default"
+     access_config {
       // Ephemeral IP
- #   }
- # }
+    }
+  }
 
 #  service_account {
 #    scopes = ["userinfo-email", "compute-ro", "storage-ro", "cloud-platform"]
